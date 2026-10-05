@@ -1,11 +1,9 @@
 # Omaniri
 
-Niri-style window management for Omarchy's **scrolling layout** — the pieces that
-are missing from Omarchy's defaults and from the [Omari](https://github.com/chicreativetech/omari)
-plugin.
+Niri-style window management for Omarchy's **scrolling layout**.
 
-It is a small **companion plugin**: it does not replace Omari. Install Omari for
-the scrolling mode, gestures, workspace overview and Alt-Tab switcher, then add
+![preview](preview.png)
+
 Omaniri for the window-handling details below. It also works on a stock
 Omarchy scrolling layout with no other plugin installed.
 
