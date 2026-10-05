@@ -1,8 +1,8 @@
--- Niri Extras -- Niri-style window management for Hyprland's scrolling layout.
+-- Omaniri -- Niri-style window management for Hyprland's scrolling layout.
 --
 -- This file is NOT loaded from ~/.config/hypr directly. The plugin's
--- bin/niri-extras-toggle copies it into
--- ~/.local/state/omarchy/toggles/hypr/niri-extras.lua, a directory Omarchy's
+-- bin/omaniri-toggle copies it into
+-- ~/.local/state/omarchy/toggles/hypr/omaniri.lua, a directory Omarchy's
 -- toggle loader (default.hypr.toggles, required from hyprland.lua) sources on
 -- every reload. Turning the plugin off removes it again.
 --

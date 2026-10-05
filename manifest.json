@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "id": "io.github.davy1ex.niri-extras",
-  "name": "Niri Extras",
+  "id": "io.github.davy1ex.omaniri",
+  "name": "Omaniri",
   "version": "0.3.1",
   "author": "davy1ex",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "barWidget": "BarWidget.qml"
   },
   "barWidget": {
-    "displayName": "Niri Extras",
+    "displayName": "Omaniri",
     "description": "Extra Niri-style window management for the scrolling layout.",
     "category": "Window management",
     "allowMultiple": false,

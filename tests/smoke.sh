@@ -1,5 +1,5 @@
 #!/bin/bash
-# Non-destructive checks for Niri Extras. Changes nothing: it only validates the
+# Non-destructive checks for Omaniri. Changes nothing: it only validates the
 # manifest, compiles the Lua, checks the toggle script, and (when the plugin is
 # installed and on) asserts every binding it promises is actually registered.
 #
@@ -8,7 +8,7 @@
 set -uo pipefail
 
 REPO="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-TOGGLE="$REPO/bin/niri-extras-toggle"
+TOGGLE="$REPO/bin/omaniri-toggle"
 fail=0
 
 ok() { printf 'ok   %s\n' "$*"; }
@@ -22,7 +22,7 @@ else
 fi
 
 if command -v luac >/dev/null 2>&1; then
-  if luac -p "$REPO/hypr/niri-extras.lua" >/dev/null 2>&1; then ok "lua compiles"; else bad "lua syntax"; fi
+  if luac -p "$REPO/hypr/omaniri.lua" >/dev/null 2>&1; then ok "lua compiles"; else bad "lua syntax"; fi
 else
   echo "skip lua (no luac)"
 fi
@@ -54,7 +54,7 @@ if command -v hyprctl >/dev/null 2>&1 && hyprctl version >/dev/null 2>&1; then
     errs="$(hyprctl configerrors 2>/dev/null)"
     if [[ -z $errs ]]; then ok "hyprctl configerrors clean"; else bad "configerrors: $errs"; fi
   else
-    echo "skip bind checks (Niri Extras is off)"
+    echo "skip bind checks (Omaniri is off)"
   fi
 else
   echo "skip bind checks (no Hyprland)"

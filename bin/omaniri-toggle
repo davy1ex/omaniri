@@ -1,35 +1,35 @@
 #!/bin/bash
-# Turn Niri Extras' Hyprland config on or off and reload Hyprland.
+# Turn Omaniri' Hyprland config on or off and reload Hyprland.
 #
-#   niri-extras-toggle [extras] [on|off|toggle|status|refresh]
+#   omaniri-toggle [extras] [on|off|toggle|status|refresh]
 #
 # The lua source lives next to this script, inside the plugin directory, so
 # installing the plugin is the whole install -- nothing is copied into
 # ~/.config/hypr first. Turning it on copies the source into
-# ~/.local/state/omarchy/toggles/hypr/niri-extras.lua, the directory Omarchy's
+# ~/.local/state/omarchy/toggles/hypr/omaniri.lua, the directory Omarchy's
 # default toggle loader sources on every reload; turning it off removes it.
 
 set -euo pipefail
 
 usage() {
-  echo "Usage: niri-extras-toggle [extras] [on|off|toggle|status|refresh]" >&2
+  echo "Usage: omaniri-toggle [extras] [on|off|toggle|status|refresh]" >&2
 }
 
 NAME="${1:-extras}"
 ACTION="${2:-toggle}"
 
-# BASH_SOURCE rather than $0: this is also run as `bash <path>/niri-extras-toggle`
+# BASH_SOURCE rather than $0: this is also run as `bash <path>/omaniri-toggle`
 # from a plugin directory that may have lost its executable bits.
 PLUGIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 TOGGLES_DIR="$STATE_HOME/omarchy/toggles/hypr"
-FLAG_FILE="$TOGGLES_DIR/niri-extras.lua"
-SOURCE="$PLUGIN_DIR/hypr/niri-extras.lua"
+FLAG_FILE="$TOGGLES_DIR/omaniri.lua"
+SOURCE="$PLUGIN_DIR/hypr/omaniri.lua"
 
 case "$NAME" in
   extras) ;;
   *)
-    echo "Unknown Niri Extras target: $NAME" >&2
+    echo "Unknown Omaniri target: $NAME" >&2
     usage
     exit 1
     ;;
@@ -41,7 +41,7 @@ on() {
   [[ -f $SOURCE ]] || { echo "Missing $SOURCE -- the plugin install is incomplete." >&2; exit 1; }
   mkdir -p "$TOGGLES_DIR"
   local tmp
-  tmp="$(mktemp "$TOGGLES_DIR/.niri-extras.XXXXXX")"
+  tmp="$(mktemp "$TOGGLES_DIR/.omaniri.XXXXXX")"
   cp "$SOURCE" "$tmp"
   chmod 644 "$tmp"
   mv -f "$tmp" "$FLAG_FILE"

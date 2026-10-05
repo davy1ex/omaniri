@@ -1,4 +1,4 @@
-# Niri Extras
+# Omaniri
 
 Niri-style window management for Omarchy's **scrolling layout** — the pieces that
 are missing from Omarchy's defaults and from the [Omari](https://github.com/chicreativetech/omari)
@@ -6,7 +6,7 @@ plugin.
 
 It is a small **companion plugin**: it does not replace Omari. Install Omari for
 the scrolling mode, gestures, workspace overview and Alt-Tab switcher, then add
-Niri Extras for the window-handling details below. It also works on a stock
+Omaniri for the window-handling details below. It also works on a stock
 Omarchy scrolling layout with no other plugin installed.
 
 ## What it adds
@@ -36,12 +36,12 @@ the config without opening the popup.
 The two fixes that Omari and Omarchy do not have:
 
 - **Move while fake-fullscreen.** Hyprland refuses with `Can't swap fullscreen
-  window`. Niri Extras briefly leaves fullscreen on every fullscreen window of
+  window`. Omaniri briefly leaves fullscreen on every fullscreen window of
   the workspace, swaps, restores each window's exact state and refocuses — all
   synchronously in one frame, so nothing flickers.
 - **Resize while fake-fullscreen, and make it stick.** A maximized window is
   re-applied to full width every time it regains focus, so a plain `colresize`
-  is lost the moment you switch away and back. Niri Extras leaves fake-fullscreen
+  is lost the moment you switch away and back. Omaniri leaves fake-fullscreen
   on shrink and starts from 90%, so the width survives.
 
 On any non-scrolling workspace (dwindle/master) it falls back to the usual
@@ -58,17 +58,17 @@ On any non-scrolling workspace (dwindle/master) it falls back to the usual
 ## Install
 
 ```sh
-omarchy plugin add https://github.com/davy1ex/niri-extras.git --enable
+omarchy plugin add https://github.com/davy1ex/omaniri.git --enable
 ```
 
-Then click the **Niri Extras** glyph on the bar (or right-click it) to turn the
+Then click the **Omaniri** glyph on the bar (or right-click it) to turn the
 bindings on. It is off until you switch it on, so nothing is written to your
 configuration without consent.
 
 CLI equivalent:
 
 ```sh
-bash ~/.config/omarchy/plugins/io.github.davy1ex.niri-extras/bin/niri-extras-toggle extras on
+bash ~/.config/omarchy/plugins/io.github.davy1ex.omaniri/bin/omaniri-toggle extras on
 ```
 
 Verify with `bash tests/smoke.sh`.
@@ -76,14 +76,14 @@ Verify with `bash tests/smoke.sh`.
 ## Remove
 
 ```sh
-omarchy plugin remove io.github.davy1ex.niri-extras --yes
+omarchy plugin remove io.github.davy1ex.omaniri --yes
 ```
 
 or turn it off first so its Hyprland config is removed from the toggles
 directory:
 
 ```sh
-bash ~/.config/omarchy/plugins/io.github.davy1ex.niri-extras/bin/niri-extras-toggle extras off
+bash ~/.config/omarchy/plugins/io.github.davy1ex.omaniri/bin/omaniri-toggle extras off
 ```
 
 ## Test
@@ -97,8 +97,8 @@ bash tests/smoke.sh
 
 ## How it works
 
-Turning it on copies `hypr/niri-extras.lua` into
-`~/.local/state/omarchy/toggles/hypr/niri-extras.lua`, the directory Omarchy's
+Turning it on copies `hypr/omaniri.lua` into
+`~/.local/state/omarchy/toggles/hypr/omaniri.lua`, the directory Omarchy's
 default toggle loader (`default.hypr.toggles`) sources on every reload, then
 runs `hyprctl reload`. Turning it off removes the file. No file under
 `~/.config/hypr` is edited.

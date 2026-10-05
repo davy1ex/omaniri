@@ -4,14 +4,14 @@ import Quickshell.Io
 import qs.Commons
 import qs.Ui
 
-// Niri Extras: niri-style window management for Omarchy's scrolling layout.
+// Omaniri: niri-style window management for Omarchy's scrolling layout.
 //
 // Bar icon plus a popup with the on/off switch, the keybindings it installs,
 // and a button to re-copy the config after a plugin update. Left-click opens
 // the popup, right-click flips the config without opening it.
 BarWidget {
   id: root
-  moduleName: "io.github.davy1ex.niri-extras"
+  moduleName: "io.github.davy1ex.omaniri"
 
   property bool enabled: false
   property bool loaded: false
@@ -33,11 +33,11 @@ BarWidget {
   readonly property color iconColor: enabled ? foreground : dim
   readonly property color barIconColor: enabled ? barForeground : Qt.darker(barForeground, 1.55)
 
-  readonly property string statusText: error !== "" ? "Niri Extras is unavailable"
+  readonly property string statusText: error !== "" ? "Omaniri is unavailable"
     : !loaded ? "Checking status…"
-    : (enabled ? "Niri Extras is on" : "Niri Extras is off")
+    : (enabled ? "Omaniri is on" : "Omaniri is off")
 
-  readonly property string toggleHint: enabled ? "Turn Niri Extras off" : "Turn Niri Extras on"
+  readonly property string toggleHint: enabled ? "Turn Omaniri off" : "Turn Omaniri on"
 
   readonly property var keybinds: [
     { keys: "SUPER + H / J / K / L", what: "Focus left / down / up / right" },
@@ -58,7 +58,7 @@ BarWidget {
 
   function apply(want) {
     if (!root.bar) return
-    root.bar.run("bash " + Util.shellQuote(root.pluginDir + "/bin/niri-extras-toggle") + " extras " + (want ? "on" : "off"))
+    root.bar.run("bash " + Util.shellQuote(root.pluginDir + "/bin/omaniri-toggle") + " extras " + (want ? "on" : "off"))
     settleTimer.restart()
   }
 
@@ -86,7 +86,7 @@ BarWidget {
 
   Process {
     id: probe
-    command: ["bash", root.pluginDir + "/bin/niri-extras-toggle", "extras", "status"]
+    command: ["bash", root.pluginDir + "/bin/omaniri-toggle", "extras", "status"]
     stdout: StdioCollector {
       waitForEnd: true
       onStreamFinished: {
@@ -118,7 +118,7 @@ BarWidget {
     foreground: root.barIconColor
     fontSize: Style.bar.iconFont
     horizontalMargin: 6
-    tooltipText: root.enabled ? "Niri Extras: on (click for options)" : "Niri Extras: off (click for options)"
+    tooltipText: root.enabled ? "Omaniri: on (click for options)" : "Omaniri: off (click for options)"
     onPressed: function(buttonCode) {
       if (buttonCode === Qt.RightButton) root.apply(!root.enabled)
       else root.togglePanel()
@@ -152,7 +152,7 @@ BarWidget {
 
         PanelHero {
           width: parent.width
-          title: "Niri Extras"
+          title: "Omaniri"
           meta: root.statusText
           foreground: root.foreground
           fontFamily: root.fontFamily
@@ -170,7 +170,7 @@ BarWidget {
         Toggle {
           id: enableToggle
           width: parent.width
-          label: "Enable Niri Extras"
+          label: "Enable Omaniri"
           description: "Niri-style focus, move, resize, center and fake-fullscreen for the scrolling layout."
           checked: root.enabled
           foreground: root.foreground
@@ -246,7 +246,7 @@ BarWidget {
             foreground: root.foreground
             fontFamily: root.fontFamily
             onClicked: {
-              root.bar.run("bash " + Util.shellQuote(root.pluginDir + "/bin/niri-extras-toggle") + " extras refresh")
+              root.bar.run("bash " + Util.shellQuote(root.pluginDir + "/bin/omaniri-toggle") + " extras refresh")
               settleTimer.restart()
             }
 
