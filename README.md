@@ -67,6 +67,8 @@ CLI equivalent:
 bash ~/.config/omarchy/plugins/io.github.davy1ex.niri-extras/bin/niri-extras-toggle extras on
 ```
 
+Verify with `bash tests/smoke.sh`.
+
 ## Remove
 
 ```sh
@@ -78,6 +80,15 @@ directory:
 
 ```sh
 bash ~/.config/omarchy/plugins/io.github.davy1ex.niri-extras/bin/niri-extras-toggle extras off
+```
+
+## Test
+
+Non-destructive: validates the manifest, compiles the Lua, checks the toggle,
+and (when the plugin is on) asserts every promised binding is registered.
+
+```sh
+bash tests/smoke.sh
 ```
 
 ## How it works
