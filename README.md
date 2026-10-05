@@ -29,6 +29,10 @@ explicit per-workspace rule, so a fresh install gets the niri-style layout
 without touching any other file. `SUPER + Alt + L` still flips an individual
 workspace back to dwindle and Omarchy remembers it.
 
+Click the bar icon to open a **popup** with the on/off switch, this key list,
+and a button to re-copy the config after an update. Right-click the icon flips
+the config without opening the popup.
+
 The two fixes that Omari and Omarchy do not have:
 
 - **Move while fake-fullscreen.** Hyprland refuses with `Can't swap fullscreen
