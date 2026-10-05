@@ -11,6 +11,8 @@ Omarchy scrolling layout with no other plugin installed.
 
 ## What it adds
 
+Bindings for the niri-style window handling, plus the layout default:
+
 | Keys | Action |
 | --- | --- |
 | `SUPER + H / J / K / L` | focus left / down / up / right (layout-aware, so it also works while a column is maximized) |
@@ -18,6 +20,14 @@ Omarchy scrolling layout with no other plugin installed.
 | `SUPER + -` / `SUPER + =` | narrow / widen the focused column by 10% — **persists across focus changes**, and shrinks straight out of fake-fullscreen |
 | `SUPER + Shift + =` | widen (the `+` key) |
 | `SUPER + C` | center the focused column |
+| `SUPER + F` | fake-fullscreen (maximized, stays in the layout) |
+| `SUPER + Alt + F` | true fullscreen |
+| `SUPER + Alt + L` | toggle the workspace between scrolling and dwindle |
+
+It also sets the **scrolling layout as the default** for workspaces without an
+explicit per-workspace rule, so a fresh install gets the niri-style layout
+without touching any other file. `SUPER + Alt + L` still flips an individual
+workspace back to dwindle and Omarchy remembers it.
 
 The two fixes that Omari and Omarchy do not have:
 

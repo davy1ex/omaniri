@@ -11,6 +11,12 @@
 -- physical position matters are bound by keycode (code:20/21) so they work
 -- under non-US layouts too.
 
+-- ------------------------------------------------------------- the mode ---
+-- Make the scrolling (niri-like) layout the default for workspaces that have no
+-- explicit per-workspace rule. A workspace switched back to dwindle with
+-- SUPER+ALT+L keeps its own saved rule, so the toggle below still works.
+hl.config({ general = { layout = "scrolling" } })
+
 -- ------------------------------------------------------------------ focus ---
 -- On the scrolling layout movefocus no-ops while the focused column is
 -- maximized/fullscreen, so use the layout's own focus message there and fall
@@ -134,3 +140,19 @@ o.bind("SUPER + C", "Center column", function()
     hl.dispatch(hl.dsp.layout("center"))
   end
 end)
+
+-- ---------------------------------------------------------- fullscreen ---
+-- Mod+F is fake-fullscreen: the window stays in the tiling layout (its column
+-- keeps its width and position), so move/resize below keep working on it.
+-- Mod+Alt+F is the real compositor fullscreen (the app does not learn it is
+-- fullscreen), the look you get from a video player's own fullscreen button.
+hl.unbind("SUPER + F")
+o.bind("SUPER + F", "Fake fullscreen", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.unbind("SUPER + ALT + F")
+o.bind("SUPER + ALT + F", "Full screen", hl.dsp.window.fullscreen_state({ internal = 2, client = 1 }))
+
+-- ------------------------------------------------------- layout toggle ---
+-- Flip the focused workspace between scrolling and dwindle. Omarchy owns the
+-- per-workspace rule and remembers it across reloads.
+hl.unbind("SUPER + ALT + L")
+o.bind("SUPER + ALT + L", "Toggle scrolling/dwindle layout", "omarchy-hyprland-workspace-layout-toggle")
