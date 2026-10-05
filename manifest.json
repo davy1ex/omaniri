@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.davy1ex.niri-extras",
+  "name": "Niri Extras",
+  "version": "0.1.0",
+  "author": "davy1ex",
+  "license": "MIT",
+  "description": "Niri-style window management on top of Hyprland's scrolling layout: focus, move windows while they are fake-fullscreen, resize columns with SUPER+-/= (persisting through focus changes), and center the focused column. Designed to complement the Omari plugin.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Niri Extras",
+    "description": "Extra Niri-style window management for the scrolling layout.",
+    "category": "Window management",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
