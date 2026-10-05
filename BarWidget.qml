@@ -62,14 +62,22 @@ BarWidget {
     settleTimer.restart()
   }
 
+  // KeyboardPanel.close() calls owner.close() when the owner has one (on
+  // outside-click dismissal or Escape). Without this, the panel assigns its own
+  // `open` instead, which breaks the `open: root.panelOpen` binding and leaves
+  // the state out of sync -- the next bar click then looked like it did nothing.
+  function close() { root.panelOpen = false }
+  function open() { root.panelOpen = true }
+  function togglePanel() { root.panelOpen = !root.panelOpen }
+
   onPanelOpenChanged: if (panelOpen) root.refresh()
 
   IpcHandler {
     target: root.moduleName
 
-    function open(): void { root.panelOpen = true }
-    function close(): void { root.panelOpen = false }
-    function toggle(): void { root.panelOpen = !root.panelOpen }
+    function open(): void { root.open() }
+    function close(): void { root.close() }
+    function toggle(): void { root.togglePanel() }
     function status(): string { return !root.loaded ? "unknown" : (root.enabled ? "on" : "off") }
     function enable(): string { root.apply(true); return "on" }
     function disable(): string { root.apply(false); return "off" }
@@ -113,7 +121,7 @@ BarWidget {
     tooltipText: root.enabled ? "Niri Extras: on (click for options)" : "Niri Extras: off (click for options)"
     onPressed: function(buttonCode) {
       if (buttonCode === Qt.RightButton) root.apply(!root.enabled)
-      else root.panelOpen = !root.panelOpen
+      else root.togglePanel()
     }
   }
 
@@ -127,11 +135,15 @@ BarWidget {
     contentWidth: panel.fittedContentWidth(Style.space(400))
     contentHeight: panel.fittedContentHeight(column.implicitHeight)
 
+    // Safety net: if the panel closes itself for any reason, keep panelOpen in
+    // step so the next click reopens instead of being swallowed.
+    onOpenChanged: if (!open && root.panelOpen) root.panelOpen = false
+
     PanelKeyCatcher {
       id: keyCatcher
       anchors.fill: parent
       onActivateRequested: root.apply(!root.enabled)
-      onCloseRequested: root.panelOpen = false
+      onCloseRequested: root.close()
 
       Column {
         id: column
